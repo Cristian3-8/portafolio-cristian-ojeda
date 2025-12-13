@@ -699,7 +699,7 @@
                 
                 <div class="hero-buttons">
                     <!-- EDITAR: Cambia "#" por la URL de tu PDF -->
-                    <a href="/public/cv/CvPortafolio.pdf" class="btn btn-primary" id="cvDownload">
+                    <a href="cv/CvPortafolio.pdf" class="btn btn-primary" id="cvDownload">
                         <i class="fas fa-download"></i> <span id="btnDownloadCV">Download CV</span>
                     </a>
                     <a href="#projects" class="btn btn-outline">
@@ -845,23 +845,22 @@
         document.head.appendChild(faScript);
     </script>
 
-    <script>
+        <script>
         // ===== CONFIGURACIÓN EDITABLE =====
-        // ⭐⭐ EDITA AQUÍ TUS DATOS ⭐⭐
         const CONFIG = {
             // Tu email (separa usuario, dominio y extensión)
             email: {
-                user: "criss259_",        // EDITAR: tu usuario de email
-                domain: "hotmail",      // EDITAR: tu dominio sin @
-                tld: ".com"              // EDITAR: .com, .dev, etc.
+                user: "criss259_",
+                domain: "hotmail",
+                tld: ".com"
             },
             // Tus redes sociales
             social: {
-                github: "https://github.com/Cristian3-8",        // EDITAR
-                linkedin: "https://www.linkedin.com/in/cristian-ojeda-developer/"  // EDITAR
+                github: "https://github.com/Cristian3-8",
+                linkedin: "https://www.linkedin.com/in/cristian-ojeda-developer/"
             },
-            // Tu CV en PDF
-            cvUrl: "/public/cv/CvPortafolio.pdf"
+            // Tu CV en PDF - CORREGIDO: ruta relativa
+            cvUrl: "cv/CvPortafolio.pdf"  // CAMBIÉ ESTO
         };
 
         // ===== PROJECTS DATA =====
@@ -880,7 +879,7 @@
                 id: 2,
                 title: "SecureAuth API",
                 subtitle: "SECUREAUTH API - SEGURIDAD DE AUTENTICACIÓN",
-                description: "SecureAuth API es un sistema de autenticación y gestión de usuarios completo construido con Spring Boot 6 y Spring Security 6. Implementa un sistema modular y escalable con doble dashboard (administrador y usuario), CRUD de usuarios, control de roles, y una interfaz moderna con Bootstrap 5.",
+                description: "SecureAuth API es un sistema de autenticación y gestión de usuarios completo construido con Spring Boot 6 y Spring Security 6.",
                 technologies: ["Java", "Spring Boot", "Spring Security", "JPA", "MySQL", "Hibernate"],
                 github: "https://github.com/Cristian3-8/secureauth-api-springboot",
                 status: "completed",
@@ -902,70 +901,44 @@
         let currentLang = 'es';
         const translations = {
             es: {
-                // Hero
                 heroTitle: "Cristian Ojeda",
                 heroSubtitle: "Especializado en <strong>Spring Boot</strong>, APIs REST y Microservicios",
-                heroDescriptionFull: "Construyendo sistemas backend escalables con código limpio y patrones de arquitectura modernos. Apasionado por crear soluciones eficientes y mantenibles.",
-                
-                // About
+                heroDescriptionFull: "Construyendo sistemas backend escalables con código limpio y patrones de arquitectura modernos.",
                 aboutTitle: "Sobre Mí",
-                aboutDescription: "Desarrollador Backend especializado en el ecosistema Java con experiencia enfocado en Spring Boot. Me apasiona crear APIs robustas, sistemas escalables y arquitecturas limpias siguiendo principios SOLID y patrones de diseño. Experto en desarrollo de microservicios, integración de sistemas y optimización de rendimiento.",
-                
-                // Projects
+                aboutDescription: "Desarrollador Backend especializado en el ecosistema Java con experiencia enfocado en Spring Boot.",
                 projectsTitle: "Proyectos",
-                projectsDescription: "Proyectos de práctica y aprendizaje que demuestran mis habilidades en el ecosistema Java. Cada proyecto representa un desafío técnico resuelto con las mejores prácticas de desarrollo backend.",
-                
-                // Contact
+                projectsDescription: "Proyectos de práctica y aprendizaje que demuestran mis habilidades en el ecosistema Java.",
                 contactTitle: "Contacto",
                 contactSubtitle: "Contáctame para colaboraciones u oportunidades",
                 emailClick: "Haz click para revelar email",
                 emailProtected: "Email protegido de bots de spam",
-                
-                // Nav
                 navHome: "Inicio",
                 navAbout: "Sobre mí",
                 navProjects: "Proyectos",
                 navContact: "Contacto",
-                
-                // Buttons
                 btnDownloadCV: "Descargar CV",
                 btnViewProjects: "Ver Proyectos",
-                
-                // Footer
                 footerText: "Desarrollador Backend Java especializado en Spring Boot",
                 footerCopyright: "© 2025 Cristian Ojeda. Construido con pasión por el desarrollo backend."
             },
             en: {
-                // Hero
                 heroTitle: "Cristian Ojeda",
                 heroSubtitle: "Specialized in <strong>Spring Boot</strong>, REST APIs and Microservices",
-                heroDescriptionFull: "Building scalable backend systems with clean code and modern architecture patterns. Passionate about creating efficient and maintainable solutions.",
-                
-                // About
+                heroDescriptionFull: "Building scalable backend systems with clean code and modern architecture patterns.",
                 aboutTitle: "About Me",
-                aboutDescription: "Backend Developer specialized in Java ecosystem with experience focused on Spring Boot. Passionate about creating robust APIs, scalable systems and clean architectures following SOLID principles and design patterns. Expert in microservices development, system integration and performance optimization.",
-                
-                // Projects
+                aboutDescription: "Backend Developer specialized in Java ecosystem with experience focused on Spring Boot.",
                 projectsTitle: "Projects",
-                projectsDescription: "Practice and learning projects that demonstrate my skills in the Java ecosystem. Each project represents a technical challenge solved with backend development best practices.",
-                
-                // Contact
+                projectsDescription: "Practice and learning projects that demonstrate my skills in the Java ecosystem.",
                 contactTitle: "Contact",
                 contactSubtitle: "Get in touch for collaboration or opportunities",
                 emailClick: "Click to reveal email",
                 emailProtected: "Email protected from spam bots",
-                
-                // Nav
                 navHome: "Home",
                 navAbout: "About",
                 navProjects: "Projects",
                 navContact: "Contact",
-                
-                // Buttons
                 btnDownloadCV: "Download CV",
                 btnViewProjects: "View Projects",
-                
-                // Footer
                 footerText: "Java Backend Developer specialized in Spring Boot",
                 footerCopyright: "© 2025 Cristian Ojeda. Built with passion for backend development."
             }
@@ -973,47 +946,32 @@
 
         // ===== FUNCIONES PRINCIPALES =====
         
-        // Cambiar idioma
         function changeLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
             
-            // Actualizar contenido
             document.getElementById('heroTitle').innerHTML = t.heroTitle;
             document.getElementById('heroSubtitle').innerHTML = t.heroSubtitle;
             document.getElementById('heroDescriptionFull').textContent = t.heroDescriptionFull;
-            
             document.getElementById('aboutTitle').textContent = t.aboutTitle;
             document.getElementById('aboutDescription').textContent = t.aboutDescription;
-            
             document.getElementById('projectsTitle').textContent = t.projectsTitle;
             document.getElementById('projectsDescription').textContent = t.projectsDescription;
-            
             document.getElementById('contactTitle').textContent = t.contactTitle;
             document.getElementById('contactSubtitle').textContent = t.contactSubtitle;
             document.getElementById('emailClick').innerHTML = `<i class="fas fa-envelope"></i> ${t.emailClick}`;
             document.getElementById('emailProtected').textContent = t.emailProtected;
-            
-            // Nav links
             document.getElementById('navHome').textContent = t.navHome;
             document.getElementById('navAbout').textContent = t.navAbout;
             document.getElementById('navProjects').textContent = t.navProjects;
             document.getElementById('navContact').textContent = t.navContact;
-            
-            // Botones
             document.getElementById('btnDownloadCV').textContent = t.btnDownloadCV;
             document.getElementById('btnViewProjects').textContent = t.btnViewProjects;
-            
-            // Footer
             document.getElementById('footerText').textContent = t.footerText;
             document.getElementById('footerCopyright').textContent = t.footerCopyright;
-            
-            // Bandera
             document.getElementById('languageFlag').textContent = lang === 'es' ? '🇺🇸' : '🇪🇸';
             
             localStorage.setItem('language', lang);
-            
-            // Re-render proyectos con nuevo idioma
             renderProjects();
         }
 
@@ -1027,36 +985,38 @@
             themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
         
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            setTheme(newTheme);
-        });
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
+            });
+        }
 
         // ===== EMAIL REVEAL =====
         const emailReveal = document.getElementById('emailReveal');
-        const emailUser = document.getElementById('emailUser');
-        const emailDomain = document.getElementById('emailDomain');
-        const emailTld = document.getElementById('emailTld');
-        
         let emailRevealed = false;
         
-        emailReveal.addEventListener('click', () => {
-            if (!emailRevealed) {
-                // Usa el email de CONFIG
-                typeEffect(CONFIG.email.user, emailUser, 100);
-                setTimeout(() => {
-                    typeEffect(CONFIG.email.domain, emailDomain, 100);
-                }, 800);
-                setTimeout(() => {
-                    typeEffect(CONFIG.email.tld, emailTld, 100);
-                }, 1600);
-                
-                emailRevealed = true;
-                const t = translations[currentLang];
-                emailReveal.querySelector('h3').innerHTML = `<i class="fas fa-check"></i> ${currentLang === 'es' ? '¡Email revelado!' : 'Email revealed!'}`;
-            }
-        });
+        if (emailReveal) {
+            emailReveal.addEventListener('click', () => {
+                if (!emailRevealed) {
+                    const emailUser = document.getElementById('emailUser');
+                    const emailDomain = document.getElementById('emailDomain');
+                    const emailTld = document.getElementById('emailTld');
+                    
+                    typeEffect(CONFIG.email.user, emailUser, 100);
+                    setTimeout(() => {
+                        typeEffect(CONFIG.email.domain, emailDomain, 100);
+                    }, 800);
+                    setTimeout(() => {
+                        typeEffect(CONFIG.email.tld, emailTld, 100);
+                    }, 1600);
+                    
+                    emailRevealed = true;
+                    emailReveal.querySelector('h3').innerHTML = `<i class="fas fa-check"></i> ${currentLang === 'es' ? '¡Email revelado!' : 'Email revealed!'}`;
+                }
+            });
+        }
         
         function typeEffect(text, element, speed = 100) {
             let i = 0;
@@ -1076,6 +1036,8 @@
         // ===== PROJECTS RENDER =====
         function renderProjects() {
             const container = document.getElementById('projectsGrid');
+            if (!container) return;
+            
             container.innerHTML = '';
             
             projectsData.forEach(project => {
@@ -1112,29 +1074,49 @@
             });
         }
 
-        // ===== MOBILE MENU =====
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
+        // ===== MENÚ MÓVIL FUNCIONAL - CÓDIGO CORREGIDO =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (mobileMenuBtn && navLinks) {
+                // Abrir/cerrar menú al hacer click en el botón hamburguesa
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navLinks.classList.toggle('active');
+                    if (navLinks.classList.contains('active')) {
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    } else {
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+                
+                // Cerrar menú al hacer click en cualquier link del menú
+                document.querySelectorAll('.nav-links a, .nav-links button').forEach(item => {
+                    item.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+                
+                // Cerrar menú al hacer click fuera de él
+                document.addEventListener('click', function(e) {
+                    if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+                
+                // Prevenir que clicks dentro del menú lo cierren
+                navLinks.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
         });
 
         // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // Solo prevenir default para links internos (#)
                 const href = this.getAttribute('href');
                 
                 if (href.startsWith('#')) {
@@ -1147,8 +1129,6 @@
                         });
                     }
                 }
-                // Si no empieza con # (como /cv/CvPortafolio.pdf)
-                // deja que el navegador maneje el link normalmente
             });
         });
 
@@ -1176,17 +1156,36 @@
 
         // ===== CONFIGURAR LINKS SOCIALES =====
         function setupSocialLinks() {
-            document.querySelector('a[href*="github.com"]').href = CONFIG.social.github;
-            document.querySelector('a[href*="linkedin.com"]').href = CONFIG.social.linkedin;
-            document.querySelector('#cvDownload').href = CONFIG.cvUrl;
+            // CORREGIDO: Busca los links específicamente
+            const githubLinks = document.querySelectorAll('a[href*="github.com"]');
+            const linkedinLinks = document.querySelectorAll('a[href*="linkedin.com"]');
+            const cvLink = document.getElementById('cvDownload');
+            
+            githubLinks.forEach(link => {
+                if (link.href.includes('tuusuario')) {
+                    link.href = CONFIG.social.github;
+                }
+            });
+            
+            linkedinLinks.forEach(link => {
+                if (link.href.includes('tuusuario')) {
+                    link.href = CONFIG.social.linkedin;
+                }
+            });
+            
+            if (cvLink) {
+                cvLink.href = CONFIG.cvUrl;
+            }
         }
 
         // ===== TOGGLE DE IDIOMA =====
         const languageToggle = document.getElementById('languageToggle');
-        languageToggle.addEventListener('click', () => {
-            const newLang = currentLang === 'es' ? 'en' : 'es';
-            changeLanguage(newLang);
-        });
+        if (languageToggle) {
+            languageToggle.addEventListener('click', () => {
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                changeLanguage(newLang);
+            });
+        }
 
         // ===== INICIALIZACIÓN =====
         document.addEventListener('DOMContentLoaded', () => {
