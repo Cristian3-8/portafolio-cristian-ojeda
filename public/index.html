@@ -12,11 +12,16 @@
     <meta property="og:description" content="Specialized in Spring Boot, REST APIs and Microservices">
     <meta property="og:type" content="website">
     
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
     
     <style>
-    /* ===== RESET & BASE ===== */
+    /* ===== VARIABLES Y RESET ===== */
     :root {
         /* Light theme */
         --primary: #0a1f44;
@@ -60,6 +65,7 @@
 
     html {
         scroll-behavior: smooth;
+        scroll-padding-top: 80px; /* Para que el scroll no quede detrás del header fijo */
     }
 
     body {
@@ -68,209 +74,66 @@
         color: var(--text-color);
         background-color: var(--bg-color);
         transition: var(--transition);
-        overflow-x: hidden;
+        padding-top: 80px; /* Compensa el header fijo */
     }
 
-    .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 var(--space-sm);
-    }
-
-    /* ===== TYPOGRAPHY ===== */
-    h1, h2, h3, h4 {
-        font-weight: 700;
-        line-height: 1.2;
-    }
-
-    h1 {
-        font-size: clamp(2.5rem, 5vw, 3.5rem);
-        margin-bottom: var(--space-sm);
-    }
-
-    h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-        margin-bottom: var(--space-md);
-        position: relative;
-    }
-
-    h2::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 60px;
-        height: 4px;
-        background: var(--secondary);
-        border-radius: 2px;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-        margin-bottom: var(--space-sm);
-    }
-
-    p {
-        margin-bottom: var(--space-sm);
-        color: var(--text-secondary);
-    }
-
-    /* ===== BUTTONS ===== */
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.75rem 1.5rem;
-        border-radius: 8px;
-        font-weight: 600;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: var(--transition);
-        gap: 0.5rem;
-        font-size: 1rem;
-    }
-
-    .btn-primary {
-        background: var(--secondary);
-        color: white;
-    }
-
-    .btn-primary:hover {
-        background: var(--primary);
-        transform: translateY(-2px);
+    /* ===== HEADER CON BOOTSTRAP ===== */
+    .navbar {
+        background: var(--card-bg) !important;
         box-shadow: var(--shadow);
-    }
-
-    .btn-outline {
-        background: transparent;
-        color: var(--secondary);
-        border: 2px solid var(--secondary);
-    }
-
-    .btn-outline:hover {
-        background: var(--secondary);
-        color: white;
-        transform: translateY(-2px);
-    }
-
-    /* ===== HEADER & NAV ===== */
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        background: var(--card-bg);
-        box-shadow: var(--shadow);
-        padding: 1rem 0;
         transition: var(--transition);
     }
 
-    .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .logo {
+    .navbar-brand {
         font-size: 1.5rem;
         font-weight: 700;
-        color: var(--primary);
-        text-decoration: none;
+        color: var(--primary) !important;
     }
 
-    .logo span {
-        color: var(--secondary);
+    .navbar-brand span {
+        color: var(--secondary) !important;
     }
 
-    .nav-links {
-        display: flex;
-        gap: var(--space-md);
-        list-style: none;
-        align-items: center;
-    }
-
-    .nav-links a {
-        color: var(--text-color);
-        text-decoration: none;
+    .nav-link {
+        color: var(--text-color) !important;
         font-weight: 500;
         position: relative;
-        padding: 0.5rem 0;
+        padding: 0.5rem 1rem !important;
     }
 
-    .nav-links a::after {
+    .nav-link::after {
         content: '';
         position: absolute;
         bottom: 0;
-        left: 0;
-        width: 0;
+        left: 1rem;
+        right: 1rem;
         height: 2px;
         background: var(--secondary);
-        transition: var(--transition);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
     }
 
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-        width: 100%;
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        transform: scaleX(1);
     }
 
-    .theme-toggle, .language-toggle {
-        background: none;
+    .navbar-toggler {
         border: none;
         color: var(--text-color);
-        cursor: pointer;
-        font-size: 1.2rem;
         padding: 0.5rem;
-        border-radius: 50%;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
     }
 
-    .theme-toggle:hover, .language-toggle:hover {
-        background: var(--border-color);
+    .navbar-toggler:focus {
+        box-shadow: none;
     }
 
-    .mobile-menu-btn {
-        display: none;
-        background: none;
-        border: none;
-        color: var(--text-color);
-        font-size: 1.5rem;
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* ===== HERO SECTION CON IMAGEN ===== */
+    /* ===== HERO SECTION ===== */
     .hero {
-        padding: calc(var(--space-xl) + 4rem) 0 var(--space-xl);
-        min-height: 100vh;
+        padding: var(--space-xl) 0;
+        min-height: calc(100vh - 80px);
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: var(--space-xl);
-    }
-
-    .hero-content {
-        flex: 1;
-        max-width: 600px;
-    }
-
-    .hero-title {
-        margin-bottom: var(--space-sm);
-    }
-
-    .hero-subtitle {
-        font-size: 1.25rem;
-        margin-bottom: var(--space-md);
     }
 
     .hero-badge {
@@ -283,26 +146,27 @@
         margin-bottom: var(--space-md);
     }
 
-    .hero-buttons {
-        display: flex;
-        gap: var(--space-sm);
-        flex-wrap: wrap;
-        margin-top: var(--space-md);
+    .hero-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        margin-bottom: var(--space-sm);
     }
 
-    /* CONTENEDOR DE IMAGEN - MODIFICADO PARA RESPONSIVE */
+    .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: var(--space-md);
+    }
+
+    /* CONTENEDOR DE IMAGEN */
     .hero-image-container {
-        flex-shrink: 0;
-        width: 380px;
-        height: 380px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
     }
 
     .hero-image {
         width: 100%;
-        height: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         object-fit: cover;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -315,16 +179,63 @@
         50% { transform: translateY(-20px); }
     }
 
-    /* ===== ABOUT SECTION ===== */
-    .about {
-        padding: var(--space-xl) 0;
+    /* ===== BOTONES PERSONALIZADOS ===== */
+    .btn-custom {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        gap: 0.5rem;
     }
 
-    .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: var(--space-md);
-        margin-top: var(--space-md);
+    .btn-primary-custom {
+        background: var(--secondary);
+        color: white;
+        border: 2px solid var(--secondary);
+    }
+
+    .btn-primary-custom:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+        color: white;
+    }
+
+    .btn-outline-custom {
+        background: transparent;
+        color: var(--secondary);
+        border: 2px solid var(--secondary);
+    }
+
+    .btn-outline-custom:hover {
+        background: var(--secondary);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .section-title {
+        position: relative;
+        margin-bottom: var(--space-md);
+        padding-bottom: 0.5rem;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--secondary);
+        border-radius: 2px;
     }
 
     .skill-category {
@@ -334,6 +245,7 @@
         box-shadow: var(--shadow);
         border: 1px solid var(--border-color);
         transition: var(--transition);
+        height: 100%;
     }
 
     .skill-category:hover {
@@ -344,9 +256,6 @@
     .skill-category h4 {
         color: var(--secondary);
         margin-bottom: var(--space-sm);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
     }
 
     .skill-tags {
@@ -362,7 +271,7 @@
         font-size: 0.9rem;
         border: 1px solid var(--border-color);
         transition: var(--transition);
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 0.5rem;
     }
@@ -373,16 +282,6 @@
     }
 
     /* ===== PROJECTS SECTION ===== */
-    .projects {
-        padding: var(--space-xl) 0;
-    }
-
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: var(--space-md);
-    }
-
     .project-card {
         background: var(--card-bg);
         border-radius: 16px;
@@ -390,6 +289,7 @@
         box-shadow: var(--shadow);
         transition: var(--transition);
         border: 1px solid var(--border-color);
+        height: 100%;
     }
 
     .project-card:hover {
@@ -399,7 +299,7 @@
 
     .project-image {
         height: 180px;
-        background: var(--primary);
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
         display: flex;
         align-items: center;
         justify-content: center;
@@ -444,18 +344,7 @@
         font-size: 0.8rem;
     }
 
-    .project-links {
-        display: flex;
-        gap: var(--space-sm);
-        margin-top: var(--space-md);
-    }
-
     /* ===== CONTACT SECTION ===== */
-    .contact {
-        padding: var(--space-xl) 0;
-        text-align: center;
-    }
-
     .email-container {
         background: var(--card-bg);
         padding: var(--space-md);
@@ -495,7 +384,7 @@
         to { opacity: 1; }
     }
 
-    /* ICONOS DE REDES SOCIALES AGRANDADOS */
+    /* ICONOS DE REDES SOCIALES */
     .social-links {
         display: flex;
         justify-content: center;
@@ -535,78 +424,25 @@
         text-align: center;
     }
 
-    .footer-content {
-        color: var(--text-secondary);
-    }
-
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 1200px) {
-        .hero-image-container {
-            width: 350px;
-            height: 350px;
-        }
-    }
-
     @media (max-width: 992px) {
         .hero {
-            flex-direction: column;
             text-align: center;
-            padding-top: calc(var(--space-xl) + 6rem);
-            gap: var(--space-lg);
-        }
-        
-        .hero .container {
-            flex-direction: column;
         }
         
         .hero-image-container {
-            width: 320px;
-            height: 320px;
+            max-width: 320px;
             margin-top: var(--space-lg);
         }
         
-        .hero-image {
-            border-width: 4px;
+        .hero-buttons {
+            justify-content: center;
         }
     }
 
     @media (max-width: 768px) {
-        .mobile-menu-btn {
-            display: flex;
-        }
-
-        .nav-links {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            background: var(--card-bg);
-            flex-direction: column;
-            padding: var(--space-md);
-            gap: var(--space-sm);
-            transform: translateY(-100%);
-            opacity: 0;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-            z-index: 999;
-        }
-
-        .nav-links.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .hero-buttons {
-            justify-content: center;
-        }
-
-        .skills-grid {
-            grid-template-columns: 1fr;
-        }
-        
         .hero-image-container {
-            width: 280px;
-            height: 280px;
+            max-width: 280px;
         }
         
         .hero-image {
@@ -618,28 +454,25 @@
             height: 100px;
             font-size: 2rem;
         }
+        
+        .nav-link::after {
+            left: 0.5rem;
+            right: 0.5rem;
+        }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 576px) {
+        body {
+            padding-top: 70px;
+        }
+        
         .hero {
-            padding: calc(var(--space-xl) + 4rem) 0 var(--space-lg);
+            padding: var(--space-lg) 0;
+            min-height: auto;
         }
         
         .hero-image-container {
-            width: 250px;
-            height: 250px;
-        }
-        
-        .hero-image {
-            border-width: 3px;
-        }
-        
-        .hero-buttons {
-            flex-direction: column;
-        }
-
-        .btn {
-            width: 100%;
+            max-width: 250px;
         }
         
         .social-link {
@@ -647,136 +480,155 @@
             height: 80px;
             font-size: 1.8rem;
         }
+        
+        .btn-custom {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
     }
 
     @media (max-width: 360px) {
         .hero-image-container {
-            width: 220px;
-            height: 220px;
+            max-width: 220px;
         }
     }
-</style>
+    </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header con Bootstrap Navbar -->
     <header>
-        <div class="container nav-container">
-            <a href="#" class="logo">Hola<span>Bienvenido</span></a>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <nav>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#home" class="active" id="navHome">Home</a></li>
-                    <li><a href="#about" id="navAbout">About</a></li>
-                    <li><a href="#projects" id="navProjects">Projects</a></li>
-                    <li><a href="#contact" id="navContact">Contact</a></li>
-                    <li>
-                        <button class="language-toggle" id="languageToggle" aria-label="Change language">
-                            <span id="languageFlag">🇪🇸</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#">
+                    Hola<span>Bienvenido</span>
+                </a>
+                
+                <!-- Botón hamburguesa de Bootstrap -->
+                <button class="navbar-toggler" type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- Menú de Bootstrap -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#projects">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                        <li class="nav-item ms-2">
+                            <button class="btn btn-sm border-0" id="themeToggle" 
+                                    style="width: 40px; height: 40px; border-radius: 50%; background: var(--border-color);">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </li>
+                        <li class="nav-item ms-2">
+                            <button class="btn btn-sm border-0" id="languageToggle"
+                                    style="width: 40px; height: 40px; border-radius: 50%; background: var(--border-color);">
+                                <span id="languageFlag">🇪🇸</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
 
-    <!-- Hero Section CON IMAGEN -->
+    <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="container" style="display: flex; align-items: center; gap: 4rem;">
-            <div class="hero-content">
-                <div class="hero-badge">Java Backend Developer</div>
-                <h1 class="hero-title" id="heroTitle">Cristian Ojeda</h1>
-                <p class="hero-subtitle" id="heroSubtitle">Specialized in <strong>Spring Boot</strong>, REST APIs and Microservices</p>
-                <p id="heroDescriptionFull">Building scalable backend systems with clean code and modern architecture patterns. Passionate about creating efficient and maintainable solutions.</p>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-badge">Java Backend Developer</div>
+                    <h1 class="hero-title" id="heroTitle">Cristian Ojeda</h1>
+                    <p class="hero-subtitle" id="heroSubtitle">Specialized in <strong>Spring Boot</strong>, REST APIs and Microservices</p>
+                    <p id="heroDescriptionFull">Building scalable backend systems with clean code and modern architecture patterns. Passionate about creating efficient and maintainable solutions.</p>
+                    
+                    <div class="hero-buttons d-flex flex-wrap gap-3 mt-4">
+                        <a href="cv/CvPortafolio.pdf" class="btn-custom btn-primary-custom" id="cvDownload">
+                            <i class="fas fa-download"></i> <span id="btnDownloadCV">Download CV</span>
+                        </a>
+                        <a href="#projects" class="btn-custom btn-outline-custom">
+                            <i class="fas fa-code"></i> <span id="btnViewProjects">View Projects</span>
+                        </a>
+                    </div>
+                </div>
                 
-                <div class="hero-buttons">
-                    <!-- EDITAR: Cambia "#" por la URL de tu PDF -->
-                    <a href="cv/CvPortafolio.pdf" class="btn btn-primary" id="cvDownload">
-                        <i class="fas fa-download"></i> <span id="btnDownloadCV">Download CV</span>
-                    </a>
-                    <a href="#projects" class="btn btn-outline">
-                        <i class="fas fa-code"></i> <span id="btnViewProjects">View Projects</span>
-                    </a>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <div class="hero-image-container">
+                        <img src="images/avatar.png" alt="Cristian Ojeda - Java Backend Developer" class="hero-image">
+                    </div>
                 </div>
             </div>
-            
-            <!-- ===== SECCIÓN PARA AGREGAR TU IMAGEN ===== 
-             
-            REEMPLAZA EL SIGUIENTE CÓDIGO CON TU IMAGEN: -->
-            
-            <div class="hero-image-container">
-                <img src="images/avatar.png" alt="Cristian Ojeda - Java Backend Developer" class="hero-image">
-            </div>
-            
-           
-            
-            <!-- ACTUALMENTE: Contenedor de placeholder - REEMPLAZAR CON TU IMAGEN 
-            <div class="hero-image-container">
-                <div class="placeholder-image">
-                    <div>👨‍💻</div>
-                    <p>Tu foto aquí</p>
-                    <small style="font-size: 0.9rem; margin-top: 0.5rem;">Reemplaza con tu imagen</small>
-                </div>
-            </div> -->
-
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="py-5">
         <div class="container">
-            <h2 id="aboutTitle">About Me</h2>
-            <p id="aboutDescription">Desarrollador Backend especializado en el ecosistema Java con enfoque en Spring Boot. Me apasiona crear APIs robustas, sistemas escalables y arquitecturas limpias.</p>
+            <h2 class="section-title" id="aboutTitle">About Me</h2>
+            <p id="aboutDescription" class="mb-5">Desarrollador Backend especializado en el ecosistema Java con enfoque en Spring Boot. Me apasiona crear APIs robustas, sistemas escalables y arquitecturas limpias.</p>
             
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4><i class="fas fa-server"></i> Backend</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag"><i class="fab fa-java"></i> Java 17</span>
-                        <span class="skill-tag"><i class="fas fa-leaf"></i> Spring Boot 3.x</span>
-                        <span class="skill-tag"><i class="fas fa-layer-group"></i> Spring MVC</span>
-                        <span class="skill-tag"><i class="fas fa-shield-alt"></i> Spring Security</span>
-                        <span class="skill-tag"><i class="fas fa-database"></i> JPA/Hibernate</span>
-                        <span class="skill-tag"><i class="fas fa-code"></i> REST APIs</span>
-                        <span class="skill-tag"><i class="fas fa-microchip"></i> Microservices</span>
-                        <span class="skill-tag"><i class="fas fa-database"></i> MySQL</span>
-                        <span class="skill-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-server me-2"></i> Backend</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag"><i class="fab fa-java"></i> Java 17</span>
+                            <span class="skill-tag"><i class="fas fa-leaf"></i> Spring Boot 3.x</span>
+                            <span class="skill-tag"><i class="fas fa-layer-group"></i> Spring MVC</span>
+                            <span class="skill-tag"><i class="fas fa-shield-alt"></i> Spring Security</span>
+                            <span class="skill-tag"><i class="fas fa-database"></i> JPA/Hibernate</span>
+                            <span class="skill-tag"><i class="fas fa-code"></i> REST APIs</span>
+                            <span class="skill-tag"><i class="fas fa-microchip"></i> Microservices</span>
+                            <span class="skill-tag"><i class="fas fa-database"></i> MySQL</span>
+                            <span class="skill-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="skill-category">
-                    <h4><i class="fas fa-brain"></i> Skills & Methodologies</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag"><i class="fas fa-code"></i> Clean Code</span>
-                        <span class="skill-tag"><i class="fas fa-cogs"></i> SOLID Principles</span>
-                        <span class="skill-tag"><i class="fas fa-project-diagram"></i> Design Patterns</span>
-                        <span class="skill-tag"><i class="fas fa-sync-alt"></i> Agile/Scrum</span>
-                        <span class="skill-tag"><i class="fas fa-chart-line"></i> Problem Solving</span>
-                        <span class="skill-tag"><i class="fas fa-users"></i> Team Collaboration</span>
-                        <span class="skill-tag"><i class="fas fa-book"></i> Continuous Learning</span>
-                        <span class="skill-tag"><i class="fas fa-tasks"></i> Code Review</span>
+                <div class="col-md-4">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-brain me-2"></i> Skills & Methodologies</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag"><i class="fas fa-code"></i> Clean Code</span>
+                            <span class="skill-tag"><i class="fas fa-cogs"></i> SOLID Principles</span>
+                            <span class="skill-tag"><i class="fas fa-project-diagram"></i> Design Patterns</span>
+                            <span class="skill-tag"><i class="fas fa-sync-alt"></i> Agile/Scrum</span>
+                            <span class="skill-tag"><i class="fas fa-chart-line"></i> Problem Solving</span>
+                            <span class="skill-tag"><i class="fas fa-users"></i> Team Collaboration</span>
+                            <span class="skill-tag"><i class="fas fa-book"></i> Continuous Learning</span>
+                            <span class="skill-tag"><i class="fas fa-tasks"></i> Code Review</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="skill-category">
-                    <h4><i class="fas fa-tools"></i> DevOps & Tools</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag"><i class="fab fa-docker"></i> Docker</span>
-                        <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
-                        <span class="skill-tag"><i class="fas fa-cube"></i> Maven</span>
-                        <span class="skill-tag"><i class="fas fa-vial"></i> JUnit</span>
-                        <span class="skill-tag"><i class="fas fa-bolt"></i> Postman</span>
-                        <span class="skill-tag"><i class="fab fa-aws"></i> AWS</span>
-                        <span class="skill-tag"><i class="fab fa-linux"></i> Linux</span>
-                        <span class="skill-tag"><i class="fas fa-terminal"></i> Bash/Shell</span>
+                <div class="col-md-4">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-tools me-2"></i> DevOps & Tools</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag"><i class="fab fa-docker"></i> Docker</span>
+                            <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+                            <span class="skill-tag"><i class="fas fa-cube"></i> Maven</span>
+                            <span class="skill-tag"><i class="fas fa-vial"></i> JUnit</span>
+                            <span class="skill-tag"><i class="fas fa-bolt"></i> Postman</span>
+                            <span class="skill-tag"><i class="fab fa-aws"></i> AWS</span>
+                            <span class="skill-tag"><i class="fab fa-linux"></i> Linux</span>
+                            <span class="skill-tag"><i class="fas fa-terminal"></i> Bash/Shell</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -784,40 +636,39 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section id="projects" class="py-5 bg-light" style="background: var(--bg-color) !important;">
         <div class="container">
-            <h2 id="projectsTitle">Projects</h2>
-            <p id="projectsDescription">Proyectos de práctica y aprendizaje que demuestran mis habilidades en el ecosistema Java.</p>
+            <h2 class="section-title" id="projectsTitle">Projects</h2>
+            <p id="projectsDescription" class="mb-5">Proyectos de práctica y aprendizaje que demuestran mis habilidades en el ecosistema Java.</p>
             
-            <div class="projects-grid" id="projectsGrid">
+            <div class="row g-4" id="projectsGrid">
                 <!-- Projects loaded dynamically -->
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="py-5">
         <div class="container">
-            <h2 id="contactTitle">Contact</h2>
-            <p id="contactSubtitle">Get in touch for collaboration or opportunities</p>
+            <h2 class="section-title text-center" id="contactTitle">Contact</h2>
+            <p id="contactSubtitle" class="text-center mb-5">Get in touch for collaboration or opportunities</p>
             
             <div class="email-container" id="emailReveal">
-                <h3 id="emailClick"><i class="fas fa-envelope"></i> Click to reveal email</h3>
+                <h3 id="emailClick" class="text-center"><i class="fas fa-envelope"></i> Click to reveal email</h3>
                 <div class="email-display" id="emailDisplay">
                     <span class="email-part" id="emailUser"></span>
                     <span class="email-part" id="emailAt">@</span>
                     <span class="email-part" id="emailDomain"></span>
                     <span class="email-part" id="emailTld"></span>
                 </div>
-                <p class="text-small" id="emailProtected">Email protected from spam bots</p>
+                <p class="text-center text-muted mt-3" id="emailProtected">Email protected from spam bots</p>
             </div>
             
-            <div class="social-links">
-                <!-- EDITAR: Cambia los href por tus links -->
-                <a href="https://github.com/tuusuario" target="_blank" class="social-link" title="GitHub">
+            <div class="social-links mt-5">
+                <a href="https://github.com/Cristian3-8" target="_blank" class="social-link" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://linkedin.com/in/tuusuario" target="_blank" class="social-link" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/cristian-ojeda-developer/" target="_blank" class="social-link" title="LinkedIn">
                     <i class="fab fa-linkedin"></i>
                 </a>
             </div>
@@ -828,39 +679,27 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <h3 style="margin: var(--space-sm) 0;">Cristian Ojeda</h3>
-                <p id="footerText">Java Backend Developer specialized in Spring Boot</p>
-                <p style="margin-top: var(--space-md); font-size: 0.9rem;" id="footerCopyright">
+                <h3 class="mb-3">Cristian Ojeda</h3>
+                <p id="footerText" class="mb-4">Java Backend Developer specialized in Spring Boot</p>
+                <p class="text-muted" id="footerCopyright">
                     &copy; 2025 Cristian Ojeda. Built with passion for backend development.
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- Font Awesome Icons -->
-    <script>
-        // Add Font Awesome dynamically
-        const faScript = document.createElement('script');
-        faScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js';
-        document.head.appendChild(faScript);
-    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script>
-        // ===== CONFIGURACIÓN EDITABLE =====
+    <script>
+        // ===== CONFIGURACIÓN =====
         const CONFIG = {
-            // Tu email (separa usuario, dominio y extensión)
-            email: {
-                user: "criss259_",
-                domain: "hotmail",
-                tld: ".com"
-            },
-            // Tus redes sociales
+            email: { user: "criss259_", domain: "hotmail", tld: ".com" },
             social: {
                 github: "https://github.com/Cristian3-8",
                 linkedin: "https://www.linkedin.com/in/cristian-ojeda-developer/"
             },
-            // Tu CV en PDF - CORREGIDO: ruta relativa
-            cvUrl: "cv/CvPortafolio.pdf"  // CAMBIÉ ESTO
+            cvUrl: "cv/CvPortafolio.pdf"
         };
 
         // ===== PROJECTS DATA =====
@@ -945,7 +784,6 @@
         };
 
         // ===== FUNCIONES PRINCIPALES =====
-        
         function changeLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
@@ -961,36 +799,49 @@
             document.getElementById('contactSubtitle').textContent = t.contactSubtitle;
             document.getElementById('emailClick').innerHTML = `<i class="fas fa-envelope"></i> ${t.emailClick}`;
             document.getElementById('emailProtected').textContent = t.emailProtected;
-            document.getElementById('navHome').textContent = t.navHome;
-            document.getElementById('navAbout').textContent = t.navAbout;
-            document.getElementById('navProjects').textContent = t.navProjects;
-            document.getElementById('navContact').textContent = t.navContact;
             document.getElementById('btnDownloadCV').textContent = t.btnDownloadCV;
             document.getElementById('btnViewProjects').textContent = t.btnViewProjects;
             document.getElementById('footerText').textContent = t.footerText;
             document.getElementById('footerCopyright').textContent = t.footerCopyright;
-            document.getElementById('languageFlag').textContent = lang === 'es' ? '🇺🇸' : '🇪🇸';
             
+            document.getElementById('languageFlag').textContent = lang === 'es' ? '🇺🇸' : '🇪🇸';
             localStorage.setItem('language', lang);
+            
             renderProjects();
+            updateNavLinks(lang);
         }
 
-        // ===== THEME TOGGLE =====
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        function updateNavLinks(lang) {
+            const t = translations[lang];
+            document.querySelectorAll('.nav-link').forEach((link, index) => {
+                if (index === 0) link.textContent = t.navHome;
+                else if (index === 1) link.textContent = t.navAbout;
+                else if (index === 2) link.textContent = t.navProjects;
+                else if (index === 3) link.textContent = t.navContact;
+            });
         }
-        
+
+        // ===== TEMA CLARO/OSCURO =====
+        const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
+            // Cargar tema guardado
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            // Configurar evento
             themeToggle.addEventListener('click', () => {
                 const currentTheme = document.documentElement.getAttribute('data-theme');
                 const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                setTheme(newTheme);
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                const icon = themeToggle.querySelector('i');
+                icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             });
+            
+            // Establecer ícono inicial
+            const icon = themeToggle.querySelector('i');
+            icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
 
         // ===== EMAIL REVEAL =====
@@ -1013,7 +864,8 @@
                     }, 1600);
                     
                     emailRevealed = true;
-                    emailReveal.querySelector('h3').innerHTML = `<i class="fas fa-check"></i> ${currentLang === 'es' ? '¡Email revelado!' : 'Email revealed!'}`;
+                    emailReveal.querySelector('h3').innerHTML = 
+                        `<i class="fas fa-check"></i> ${currentLang === 'es' ? '¡Email revelado!' : 'Email revealed!'}`;
                 }
             });
         }
@@ -1029,7 +881,6 @@
                     setTimeout(typeChar, speed);
                 }
             }
-            
             typeChar();
         }
 
@@ -1042,143 +893,37 @@
             
             projectsData.forEach(project => {
                 const projectCard = document.createElement('div');
-                projectCard.className = 'project-card';
-                
+                projectCard.className = 'col-md-4';
                 projectCard.innerHTML = `
-                    <div class="project-image" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
-                        <div style="font-size: 3rem;">${project.icon}</div>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-status status-${project.status}">
-                            ${project.status === 'completed' ? '✅ ' + (currentLang === 'es' ? 'Completado' : 'Completed') : '🚧 ' + (currentLang === 'es' ? 'En Progreso' : 'In Progress')}
-                        </span>
-                        <h3>${project.title}</h3>
-                        <p><strong>${project.subtitle}</strong></p>
-                        <p>${project.description}</p>
-                        
-                        <div class="project-tech">
-                            ${project.technologies.map(tech => 
-                                `<span class="tech-tag">${tech}</span>`
-                            ).join('')}
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="font-size: 3rem;">${project.icon}</div>
                         </div>
-                        
-                        <div class="project-links">
-                            <a href="${project.github}" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem;">
-                                <i class="fab fa-github"></i> ${currentLang === 'es' ? 'Código' : 'Code'}
-                            </a>
+                        <div class="project-content">
+                            <span class="project-status status-${project.status}">
+                                ${project.status === 'completed' ? '✅ ' + (currentLang === 'es' ? 'Completado' : 'Completed') : '🚧 ' + (currentLang === 'es' ? 'En Progreso' : 'In Progress')}
+                            </span>
+                            <h4 class="mt-2">${project.title}</h4>
+                            <p class="text-muted"><small>${project.subtitle}</small></p>
+                            <p class="my-3">${project.description}</p>
+                            <div class="project-tech">
+                                ${project.technologies.map(tech => 
+                                    `<span class="tech-tag">${tech}</span>`
+                                ).join('')}
+                            </div>
+                            <div class="mt-3">
+                                <a href="${project.github}" target="_blank" class="btn-custom btn-outline-custom">
+                                    <i class="fab fa-github"></i> ${currentLang === 'es' ? 'Código' : 'Code'}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 `;
-                
                 container.appendChild(projectCard);
             });
         }
 
-        // ===== MENÚ MÓVIL FUNCIONAL - CÓDIGO CORREGIDO =====
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
-            
-            if (mobileMenuBtn && navLinks) {
-                // Abrir/cerrar menú al hacer click en el botón hamburguesa
-                mobileMenuBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    navLinks.classList.toggle('active');
-                    if (navLinks.classList.contains('active')) {
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-                    } else {
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                });
-                
-                // Cerrar menú al hacer click en cualquier link del menú
-                document.querySelectorAll('.nav-links a, .nav-links button').forEach(item => {
-                    item.addEventListener('click', () => {
-                        navLinks.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    });
-                });
-                
-                // Cerrar menú al hacer click fuera de él
-                document.addEventListener('click', function(e) {
-                    if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                        navLinks.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                });
-                
-                // Prevenir que clicks dentro del menú lo cierren
-                navLinks.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            }
-        });
-
-        // ===== SMOOTH SCROLL =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        });
-
-        // ===== ACTIVE NAV LINK =====
-        function updateActiveNavLink() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // ===== CONFIGURAR LINKS SOCIALES =====
-        function setupSocialLinks() {
-            // CORREGIDO: Busca los links específicamente
-            const githubLinks = document.querySelectorAll('a[href*="github.com"]');
-            const linkedinLinks = document.querySelectorAll('a[href*="linkedin.com"]');
-            const cvLink = document.getElementById('cvDownload');
-            
-            githubLinks.forEach(link => {
-                if (link.href.includes('tuusuario')) {
-                    link.href = CONFIG.social.github;
-                }
-            });
-            
-            linkedinLinks.forEach(link => {
-                if (link.href.includes('tuusuario')) {
-                    link.href = CONFIG.social.linkedin;
-                }
-            });
-            
-            if (cvLink) {
-                cvLink.href = CONFIG.cvUrl;
-            }
-        }
-
-        // ===== TOGGLE DE IDIOMA =====
+        // ===== CAMBIO DE IDIOMA =====
         const languageToggle = document.getElementById('languageToggle');
         if (languageToggle) {
             languageToggle.addEventListener('click', () => {
@@ -1189,25 +934,43 @@
 
         // ===== INICIALIZACIÓN =====
         document.addEventListener('DOMContentLoaded', () => {
-            // Configurar links sociales
-            setupSocialLinks();
-            
-            // Set initial theme
+            // Cargar tema
             const savedTheme = localStorage.getItem('theme') || 'light';
-            setTheme(savedTheme);
+            document.documentElement.setAttribute('data-theme', savedTheme);
             
-            // Set initial language
+            // Cargar idioma
             const savedLang = localStorage.getItem('language') || 'es';
             changeLanguage(savedLang);
             
-            // Render projects
+            // Renderizar proyectos
             renderProjects();
             
-            // Update nav on load
-            updateActiveNavLink();
+            // Configurar CV download
+            const cvLink = document.getElementById('cvDownload');
+            if (cvLink) cvLink.href = CONFIG.cvUrl;
+            
+            // Activar link actual en navegación
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
         });
-
-        window.addEventListener('scroll', updateActiveNavLink);
     </script>
 </body>
 </html>
